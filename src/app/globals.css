@@ -1,0 +1,113 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Brand palette — sampled to match the Phoenix Landscaping logo.
+     Update these values if the final logo differs. */
+  --brand-burgundy: #6e1f2a;
+  --brand-burgundy-dark: #4a141c;
+  --brand-cream: #f7f3ea;
+  --brand-warm-white: #fcfbf7;
+  --brand-gold: #c8a96b;
+  --brand-ink: #292526;
+  --brand-muted: #6b6561;
+  --brand-line: #e7e0d3;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-warmwhite text-ink font-sans antialiased;
+    overflow-x: hidden;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-serif text-burgundy-700;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--brand-gold);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  ::selection {
+    background: var(--brand-burgundy);
+    color: #fff;
+  }
+}
+
+@layer components {
+  .section {
+    @apply py-16 sm:py-20 lg:py-24;
+  }
+
+  .eyebrow {
+    @apply inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-burgundy;
+  }
+
+  .rule-gold {
+    @apply block h-px w-12 bg-gold;
+  }
+
+  .card {
+    @apply rounded-card border border-line bg-warmwhite shadow-card transition duration-300;
+  }
+
+  .card-hover {
+    @apply hover:-translate-y-1 hover:border-gold/50 hover:shadow-lift;
+  }
+
+  .link-underline {
+    @apply relative inline-flex items-center gap-1.5 font-semibold text-burgundy transition-colors hover:text-burgundy-700;
+  }
+}
+
+/* Scroll-reveal: visible by default so content is never hidden without JS. */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .reveal,
+  .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
