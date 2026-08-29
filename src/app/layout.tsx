@@ -4,6 +4,7 @@ import './globals.css';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import MobileQuoteBar from '@/components/MobileQuoteBar';
+import IntroSplash from '@/components/IntroSplash';
 import StructuredData from '@/components/StructuredData';
 import { site } from '@/lib/site';
 
@@ -65,6 +66,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en-CA" className={`${display.variable} ${body.variable}`}>
       <body>
+        <IntroSplash />
+
         <noscript>
           {/* Content animates in with JavaScript; without it, show everything immediately. */}
           <style>{`.reveal{opacity:1 !important;transform:none !important}`}</style>

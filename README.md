@@ -178,6 +178,7 @@ automatically by `next/font`.
 
 ```
 src/components/
+  IntroSplash.tsx       Brand intro shown on a full page load
   Navbar.tsx            Sticky header + contact strip
   MobileMenu.tsx        Slide-in mobile navigation
   MobileQuoteBar.tsx    Sticky mobile quote / call bar
@@ -241,3 +242,35 @@ No pricing, no invented testimonials, awards, certifications, statistics, client
 guarantees, response times or service areas. Every claim on the site traces back to information
 supplied by Phoenix Landscaping: 30+ years of industry experience, locally owned, family
 operated, insured, WCB covered, serving Edmonton and surrounding communities.
+
+---
+
+## 13. Intro splash
+
+`src/components/IntroSplash.tsx`, mounted once in `src/app/layout.tsx`. It is a purely
+decorative brand intro: logo fades up, business name, tagline, then a thin gold progress line,
+and the whole overlay cross-fades out to reveal the page.
+
+- Total run time is about **2 seconds** (1.4s hold + 0.6s fade). Adjust `HOLD_MS` and `EXIT_MS`
+  at the top of the file.
+- It never waits on images, fonts or network requests — the timing is fixed, so a slow
+  connection cannot leave a visitor stuck behind it.
+- It shows on a **full page load only**. Moving between pages with the site navigation is a
+  client-side transition, so the splash does not replay.
+- Under `prefers-reduced-motion` it drops all movement, uses plain fades, and runs shorter.
+- With JavaScript disabled it never renders at all.
+- It removes itself from the DOM when finished, restores body scrolling, and leaves no wrapper
+  behind — page layout after it disappears is byte-for-byte what it was before.
+
+**To show it on the homepage only**, wrap the render in a pathname check:
+
+```tsx
+'use client';
+import { usePathname } from 'next/navigation';
+// ...inside the component, before the timers run:
+const pathname = usePathname();
+if (pathname !== '/') return null;
+```
+
+**To show it once per browser session** instead of on every load, guard the effect with
+`sessionStorage.getItem('phx-splash-seen')` and set that key when the splash finishes.
