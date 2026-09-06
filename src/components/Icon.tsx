@@ -18,6 +18,7 @@ import {
   Sparkles,
   Sprout,
   Sun,
+  TreeDeciduous,
   Users,
   type LucideIcon,
 } from 'lucide-react';
@@ -42,6 +43,7 @@ export const iconMap = {
   Sparkles,
   Sprout,
   Sun,
+  TreeDeciduous,
   Users,
 } satisfies Record<string, LucideIcon>;
 

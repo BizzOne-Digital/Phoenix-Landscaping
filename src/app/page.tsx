@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import HeroSection from '@/components/HeroSection';
 import TrustSection from '@/components/TrustSection';
 import ServiceGrid from '@/components/ServiceGrid';
+import CrewAtWorkSection from '@/components/CrewAtWorkSection';
 import AudienceSection from '@/components/AudienceSection';
 import WhyChooseUs from '@/components/WhyChooseUs';
 import FourSeasonSection from '@/components/FourSeasonSection';
@@ -12,7 +13,7 @@ import QuoteCTA from '@/components/QuoteCTA';
 export const metadata: Metadata = {
   title: 'Landscaping & Property Maintenance in Edmonton | Phoenix Landscaping',
   description:
-    'Phoenix Landscaping is a locally owned, family-operated Edmonton company offering landscaping, property maintenance, snow removal and seasonal cleanup for residential, condominium, commercial and managed properties. Request a free quote.',
+    'Phoenix Landscaping is a locally owned, family-operated Edmonton company offering landscaping, property maintenance, tree and bush trimming, snow removal and seasonal cleanup for residential, condominium, commercial and managed properties. Request a free quote.',
   alternates: { canonical: '/' },
   openGraph: {
     url: '/',
@@ -28,6 +29,7 @@ export default function HomePage() {
       <HeroSection />
       <TrustSection />
       <ServiceGrid />
+      <CrewAtWorkSection />
       <AudienceSection />
       <WhyChooseUs />
       <FourSeasonSection />

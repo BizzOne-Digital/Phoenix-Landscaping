@@ -11,7 +11,7 @@ type QuoteCTAProps = {
 
 export default function QuoteCTA({
   title = 'Ready for Reliable Property Care?',
-  description = 'Whether you need residential landscaping, commercial property maintenance, seasonal cleanup, or snow removal, Phoenix Landscaping is ready to help.',
+  description = 'Whether you need residential landscaping, commercial property maintenance, tree and bush trimming, seasonal cleanup, or snow removal, Phoenix Landscaping is ready to help.',
   className = '',
 }: QuoteCTAProps) {
   return (

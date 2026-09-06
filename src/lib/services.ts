@@ -48,6 +48,23 @@ export const services: Service[] = [
     image: images.services.maintenance,
   },
   {
+    slug: 'tree-and-bush-trimming',
+    title: 'Tree & Bush Trimming',
+    shortDescription:
+      'Tree trimming and bush trimming that keeps mature growth shaped, controlled and safely clear of buildings and walkways.',
+    longDescription:
+      'Overgrown trees and shrubs are the fastest way for a well-kept property to start looking neglected — and they turn into a liability once branches reach roofs, signage, parking areas or walkways. Phoenix Landscaping handles tree trimming and bush trimming for residential, condominium, commercial and managed properties across Edmonton and surrounding communities, shaping growth back to a clean, controlled line and clearing the debris before the crew leaves.',
+    benefits: [
+      'Trees and shrubs shaped back to a clean, controlled line',
+      'Branches cleared from roofs, signage, walkways and parking areas',
+      'Cuts made with the health of the tree or shrub in mind',
+      'Trimmings and debris removed as part of the job',
+    ],
+    suitableFor: ['Residential', 'Condominium', 'Commercial', 'Property Management'],
+    icon: 'TreeDeciduous',
+    image: images.services.treeTrimming,
+  },
+  {
     slug: 'snow-removal',
     title: 'Snow Removal',
     shortDescription:
@@ -167,6 +184,7 @@ export const propertyTypes = [
 export const serviceOptions = [
   'Landscaping',
   'Property Maintenance',
+  'Tree & Bush Trimming',
   'Snow Removal',
   'Seasonal Cleanup',
   'Multiple Services',

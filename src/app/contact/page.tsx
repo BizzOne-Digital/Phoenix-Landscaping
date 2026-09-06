@@ -4,13 +4,14 @@ import ContactInfo from '@/components/ContactInfo';
 import QuoteForm from '@/components/QuoteForm';
 import Reveal from '@/components/Reveal';
 import TrustBadges from '@/components/TrustBadges';
+import ScopeNote from '@/components/ScopeNote';
 import { images } from '@/lib/images';
 import { site } from '@/lib/site';
 
 export const metadata: Metadata = {
   title: 'Contact Phoenix Landscaping | Free Quotes in Edmonton & Area',
   description:
-    'Contact Phoenix Landscaping in Edmonton for landscaping, property maintenance, snow removal and seasonal cleanup. Call +1 780-399-5222 or request a free quote online.',
+    'Contact Phoenix Landscaping in Edmonton for landscaping, property maintenance, tree and bush trimming, snow removal and seasonal cleanup. Call +1 780-399-5222 or request a free quote online. No small yard jobs.',
   alternates: { canonical: '/contact' },
   openGraph: {
     url: '/contact',
@@ -47,6 +48,8 @@ export default function ContactPage() {
             </p>
 
             <ContactInfo className="mt-8" />
+
+            <ScopeNote className="mt-8" />
 
             <div className="mt-8 rounded-card border border-line bg-cream p-6">
               <h3 className="text-[0.72rem] font-semibold uppercase tracking-[0.16em] text-burgundy">

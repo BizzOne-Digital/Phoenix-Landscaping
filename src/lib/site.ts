@@ -9,8 +9,8 @@ export const site = {
   contactPerson: 'Jeff',
   phone: '+1 780-399-5222',
   phoneHref: 'tel:+17803995222',
-  email: 'jeff.bil@outlook.com',
-  emailHref: 'mailto:jeff.bil@outlook.com',
+  email: 'info@phoenix4seasoncare.ca',
+  emailHref: 'mailto:info@phoenix4seasoncare.ca',
   city: 'Edmonton',
   region: 'AB',
   regionName: 'Alberta',
@@ -19,10 +19,16 @@ export const site = {
   serviceArea: 'Edmonton and surrounding communities',
   tagline: 'Reliable Four-Season Property Care in Edmonton and Area',
   description:
-    'Locally owned and family-operated, Phoenix Landscaping provides dependable landscaping, property maintenance, snow removal, and seasonal cleanup services throughout Edmonton and surrounding communities.',
+    'Locally owned and family-operated, Phoenix Landscaping provides dependable landscaping, property maintenance, tree and bush trimming, snow removal, and seasonal cleanup services throughout Edmonton and surrounding communities.',
   shortDescription:
     'Locally owned and family-operated property care serving Edmonton and surrounding communities.',
   yearsExperience: '30+',
+  /** Job-scope policy — shown on the Services and Contact pages so leads self-qualify. */
+  scopeNote: {
+    title: 'Please Note: No Small Yard Jobs',
+    description:
+      'Phoenix Landscaping takes on full property care and larger scheduled work — landscaping projects, ongoing maintenance, tree and bush trimming, seasonal cleanups and snow removal. We do not take on small one-off yard jobs such as a single lawn cut or a quick tidy-up. If you are unsure whether your property fits, call and ask — we will tell you straight.',
+  },
   /** Replace with the live domain before launch — used for canonicals, OG tags and the sitemap. */
   url: 'https://www.phoenixlandscaping.ca',
 } as const;
@@ -98,7 +104,7 @@ export const whyChoose = [
   {
     title: 'Year-Round Property Care',
     description:
-      'Landscaping, maintenance, seasonal cleanup and snow removal from one dependable local team.',
+      'Landscaping, maintenance, tree and bush trimming, seasonal cleanup and snow removal from one dependable local team.',
     icon: 'CalendarRange',
   },
   {

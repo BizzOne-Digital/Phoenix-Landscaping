@@ -7,18 +7,19 @@ import Icon from '@/components/Icon';
 import AudienceSection from '@/components/AudienceSection';
 import FourSeasonSection from '@/components/FourSeasonSection';
 import QuoteCTA from '@/components/QuoteCTA';
+import ScopeNote from '@/components/ScopeNote';
 import { ButtonLink } from '@/components/ui/Button';
 import { services } from '@/lib/services';
 import { images } from '@/lib/images';
 
 export const metadata: Metadata = {
-  title: 'Landscaping, Property Maintenance & Snow Removal Services in Edmonton',
+  title: 'Landscaping, Tree Trimming & Snow Removal Services in Edmonton',
   description:
-    'Explore Phoenix Landscaping services in Edmonton and area: landscaping, ongoing property maintenance, snow removal and seasonal cleanup for residential, condominium, commercial and managed properties.',
+    'Explore Phoenix Landscaping services in Edmonton and area: landscaping, ongoing property maintenance, tree and bush trimming, snow removal and seasonal cleanup for residential, condominium, commercial and managed properties. No small yard jobs.',
   alternates: { canonical: '/services' },
   openGraph: {
     url: '/services',
-    title: 'Landscaping, Property Maintenance & Snow Removal Services in Edmonton',
+    title: 'Landscaping, Tree Trimming & Snow Removal Services in Edmonton',
     description:
       'Four-season property care from a locally owned, family-operated Edmonton company with 30+ years of industry experience.',
   },
@@ -31,7 +32,7 @@ export default function ServicesPage() {
         breadcrumb="Services"
         eyebrow="Our Services"
         title="Professional Property Care, Year Round"
-        intro="Landscaping, property maintenance, snow removal and seasonal cleanup — delivered by one local, family-operated team across Edmonton and surrounding communities."
+        intro="Landscaping, property maintenance, tree and bush trimming, snow removal and seasonal cleanup — delivered by one local, family-operated team across Edmonton and surrounding communities."
         image={images.servicesHero}
       />
 
@@ -127,6 +128,14 @@ export default function ServicesPage() {
           </section>
         );
       })}
+
+      <section className="section bg-warmwhite">
+        <div className="container">
+          <Reveal>
+            <ScopeNote className="mx-auto max-w-3xl" />
+          </Reveal>
+        </div>
+      </section>
 
       <FourSeasonSection />
       <AudienceSection />

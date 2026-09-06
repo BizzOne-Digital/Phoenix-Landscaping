@@ -16,7 +16,7 @@ export default function ServiceGrid() {
           />
         </Reveal>
 
-        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {services.map((service, index) => (
             <Reveal key={service.slug} delay={index * 90}>
               <ServiceCard service={service} />

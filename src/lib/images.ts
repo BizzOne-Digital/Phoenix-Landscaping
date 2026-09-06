@@ -1,11 +1,13 @@
 /**
  * Every photograph used on the site is declared here.
  *
- * The images currently point at Unsplash (free to use commercially, no
- * attribution required). To swap in Phoenix Landscaping's own photography:
- *   1. Drop the file into /public/images (e.g. /public/images/hero.jpg)
- *   2. Change the `src` below to '/images/hero.jpg'
- * Nothing else in the codebase needs to change.
+ * All images are Phoenix Landscaping's own job photography, stored in
+ * /public/images/phoenix and referenced by their public path. To swap one out,
+ * drop the new file into that folder and change the `src` below — nothing else
+ * in the codebase needs to change.
+ *
+ * Source files are 1125px wide (1125x1500 portrait, 1125x844 landscape), so
+ * `sizes` is kept honest at each call site and next/image handles the rest.
  */
 
 export type SiteImage = {
@@ -13,86 +15,136 @@ export type SiteImage = {
   alt: string;
 };
 
-const unsplash = (id: string, w = 1600) =>
-  `https://images.unsplash.com/${id}?auto=format&fit=crop&w=${w}&q=80`;
+/** Job photography lives in one folder; keep the path in a single place. */
+const photo = (file: string) => `/images/phoenix/${file}`;
 
 export const images = {
   hero: {
-    src: unsplash('photo-1738193830098-2d92352a1856', 2000),
-    alt: 'A well-maintained residential property with a trimmed lawn, mulched garden beds and a stone retaining wall',
+    src: photo('39.jpg'),
+    alt: 'A completed courtyard with new shrub beds, decorative rock and fresh concrete walkways',
   },
   aboutPortrait: {
-    src: unsplash('photo-1605117882932-f9e32b03fea9', 1200),
-    alt: 'A landscaping crew member working on garden beds in front of a residential home',
+    src: photo('31.jpg'),
+    alt: 'Two Phoenix Landscaping crew members walking a property with backpack blowers during a cleanup',
   },
   servicesHero: {
-    src: unsplash('photo-1668120089662-42642838cfef', 2000),
-    alt: 'A wide, freshly maintained lawn framed by shaped shrubs and mature trees',
+    src: photo('34.jpg'),
+    alt: 'A crew member rolling freshly laid sod across a newly installed commercial lawn',
   },
   contactHero: {
-    src: unsplash('photo-1617850687395-620757feb1f3', 2000),
-    alt: 'An aerial view of a landscaped outdoor living area with planters and seating',
+    src: photo('12.jpg'),
+    alt: 'Tidy condominium grounds with a mown lawn, swept walkway and mature spruce trees',
   },
   testimonialsHero: {
-    src: unsplash('photo-1663185777390-d44a6f4724b9', 2000),
-    alt: 'A tidy garden pathway bordered by maintained planting beds',
+    src: photo('54.jpg'),
+    alt: 'A finished commercial walkway bordered by fresh mulch beds and autumn planting',
   },
   aboutHero: {
-    src: unsplash('photo-1700689807667-82630348b301', 2000),
-    alt: 'A brick walkway running past maintained hedges and flower beds',
+    src: photo('55.jpg'),
+    alt: 'Three Phoenix Landscaping crew members in high-visibility vests working together on a commercial site',
   },
   services: {
     landscaping: {
-      src: unsplash('photo-1700689807667-82630348b301'),
-      alt: 'A brick pathway bordered by shaped hedges and planted garden beds',
+      src: photo('41.jpg'),
+      alt: 'Two crew members unrolling fresh sod across prepared soil on a bright autumn day',
     },
     maintenance: {
-      src: unsplash('photo-1689728318937-17d24bc0a65c'),
-      alt: 'A property maintenance worker trimming grass edges beside a planting bed',
+      src: photo('47.jpg'),
+      alt: 'A neatly striped lawn beside a residential deck, freshly cut on a maintenance visit',
+    },
+    treeTrimming: {
+      src: photo('30.jpg'),
+      alt: 'A crew member trimming back overgrown shrubs in a front yard, cut branches piled on the lawn',
     },
     snow: {
-      src: unsplash('photo-1517430784299-86c141b421df'),
-      alt: 'A heavy loader clearing snow from a parking area during a snowfall',
+      src: photo('5.jpg'),
+      alt: 'A residential driveway cleared down to the pavement between deep snowbanks after a snowfall',
     },
     cleanup: {
-      src: unsplash('photo-1636750121381-9245cd137f32'),
-      alt: 'A thick layer of fallen autumn leaves covering a property',
+      src: photo('13.jpg'),
+      alt: 'A dump trailer loaded with leaves and yard debris during a fall cleanup at a townhouse complex',
     },
   },
   seasons: {
     spring: {
-      src: unsplash('photo-1734079692079-aae7e24a7035', 1200),
-      alt: 'Hands pressing fresh sod into prepared ground during spring property work',
+      src: photo('8.jpg'),
+      alt: 'A crew member bagging winter debris from a property during an early spring cleanup',
     },
     summer: {
-      src: unsplash('photo-1734303023491-db8037a21f09', 1200),
-      alt: 'A two-person crew mowing a large striped lawn on a summer day',
+      src: photo('42.jpg'),
+      alt: 'A sunlit, freshly cut lawn shaded by mature trees at a townhouse complex in midsummer',
     },
     fall: {
-      src: unsplash('photo-1543775562-fb5294aafcf7', 1200),
-      alt: 'Patio chairs surrounded by fallen leaves before a seasonal cleanup',
+      src: photo('14.jpg'),
+      alt: 'A crew member clearing fallen leaves from a residential street with a blower in autumn',
     },
     winter: {
-      src: unsplash('photo-1579278350462-e88ef330c943', 1200),
-      alt: 'A plow truck clearing snow from a road during a winter storm',
+      src: photo('6.jpg'),
+      alt: 'A commercial storefront sidewalk cleared and sanded on a winter morning',
     },
   },
   audiences: {
     residential: {
-      src: unsplash('photo-1663185777390-d44a6f4724b9', 1200),
-      alt: 'A neatly maintained residential garden with a gravel pathway',
+      src: photo('45.jpg'),
+      alt: 'A residential street of well-kept homes with mown boulevards and maintained street trees',
     },
     condominium: {
-      src: unsplash('photo-1673843916246-06c46ea3a72a', 1200),
-      alt: 'A condominium tower surrounded by mature trees and maintained grounds',
+      src: photo('44.jpg'),
+      alt: 'A townhouse condominium walkway framed by cut lawns and young maintained trees',
     },
     commercial: {
-      src: unsplash('photo-1643391448949-735f48c6ef66', 1200),
-      alt: 'A commercial building fronted by landscaped beds and trimmed lawn',
+      src: photo('51.jpg'),
+      alt: 'A commercial clinic entrance fronted by a freshly mulched bed with new shrub planting',
     },
     propertyManagement: {
-      src: unsplash('photo-1758501395624-de0bce47d124', 1200),
-      alt: 'An office property courtyard with maintained planters and walkways',
+      src: photo('9.jpg'),
+      alt: 'Crew and equipment working a managed apartment property during a seasonal cleanup',
     },
   },
 } satisfies Record<string, SiteImage | Record<string, SiteImage>>;
+
+export type ShowcaseImage = SiteImage & { label: string };
+
+/**
+ * Hero collage — one photo per service pillar, shown beside the headline on
+ * large screens so the hero reflects the full range of work rather than one job.
+ */
+export const heroShowcase: readonly ShowcaseImage[] = [
+  {
+    src: photo('52.jpg'),
+    alt: 'A newly planted tree in a fresh mulch bed edged with river rock at a commercial property',
+    label: 'Landscaping',
+  },
+  {
+    src: photo('49.jpg'),
+    alt: 'A freshly mown, striped lawn running between condominium decks and mature evergreens',
+    label: 'Property Maintenance',
+  },
+  {
+    src: photo('30.jpg'),
+    alt: 'A crew member cutting back overgrown shrubs, with trimmed branches stacked on the lawn behind',
+    label: 'Tree & Bush Trimming',
+  },
+  {
+    src: photo('23.jpg'),
+    alt: 'A machine and crew member clearing and sanding a sidewalk on a winter night',
+    label: 'Snow Removal',
+  },
+];
+
+/**
+ * Job-site footage used by the crew-at-work section on the home page.
+ * The poster is a still from the same commercial project, so the section has
+ * something to show before the file is requested (the video uses preload="none").
+ */
+export const siteVideo = {
+  src: photo('vid.mp4'),
+  type: 'video/mp4',
+  poster: {
+    src: photo('53.jpg'),
+    alt: 'A curved commercial walkway beside a freshly prepared pathway on a Phoenix Landscaping job site',
+  },
+  /** Describes the footage for anyone who cannot see it. */
+  description:
+    'Phoenix Landscaping crew members preparing and compacting a new pathway at a commercial property, working with a wheelbarrow, hose and roller.',
+} as const;

@@ -13,7 +13,7 @@ import { site } from '@/lib/site';
 export const metadata: Metadata = {
   title: 'About Phoenix Landscaping | Family-Operated Edmonton Property Care',
   description:
-    'Phoenix Landscaping is a locally owned, family-operated Edmonton business with more than 30 years of industry experience in landscaping, property maintenance, seasonal cleanup and snow removal. Insured and WCB covered.',
+    'Phoenix Landscaping is a locally owned, family-operated Edmonton business with more than 30 years of industry experience in landscaping, property maintenance, tree and bush trimming, seasonal cleanup and snow removal. Insured and WCB covered.',
   alternates: { canonical: '/about' },
   openGraph: {
     url: '/about',
