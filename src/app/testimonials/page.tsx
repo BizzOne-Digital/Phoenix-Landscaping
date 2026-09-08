@@ -5,8 +5,7 @@ import QuoteCTA from '@/components/QuoteCTA';
 import Reveal from '@/components/Reveal';
 import SectionHeading from '@/components/SectionHeading';
 import Icon from '@/components/Icon';
-import { images } from '@/lib/images';
-import { trustPoints } from '@/lib/site';
+import { getPageImages, getTrustPoints } from '@/lib/content';
 
 export const metadata: Metadata = {
   title: 'Client Testimonials | Phoenix Landscaping Edmonton',
@@ -21,7 +20,9 @@ export const metadata: Metadata = {
   },
 };
 
-export default function TestimonialsPage() {
+export default async function TestimonialsPage() {
+  const [trustPoints, images] = await Promise.all([getTrustPoints(), getPageImages()]);
+
   return (
     <>
       <PageHero

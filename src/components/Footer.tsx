@@ -1,10 +1,11 @@
 import Link from 'next/link';
 import { Mail, MapPin, Phone } from 'lucide-react';
-import { nav, site } from '@/lib/site';
-import { services } from '@/lib/services';
+import { nav } from '@/lib/site';
+import { getServices, getSiteSettings } from '@/lib/content';
 import Logo from '@/components/Logo';
 
-export default function Footer() {
+export default async function Footer() {
+  const [site, services] = await Promise.all([getSiteSettings(), getServices()]);
   const year = new Date().getFullYear();
 
   return (

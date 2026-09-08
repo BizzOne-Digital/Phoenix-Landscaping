@@ -1,11 +1,13 @@
 import { Info } from 'lucide-react';
-import { site } from '@/lib/site';
+import { getSiteSettings } from '@/lib/content';
 
 /**
  * Job-scope notice. Keeps small one-off yard-job enquiries from coming through
- * the quote form. Copy lives in site.scopeNote.
+ * the quote form. Copy is managed in the dashboard under Site settings.
  */
-export default function ScopeNote({ className = '' }: { className?: string }) {
+export default async function ScopeNote({ className = '' }: { className?: string }) {
+  const { scopeNote } = await getSiteSettings();
+
   return (
     <div
       className={`rounded-card border border-line border-l-4 border-l-gold bg-cream p-6 sm:p-7 ${className}`}
@@ -19,10 +21,10 @@ export default function ScopeNote({ className = '' }: { className?: string }) {
         </span>
         <div>
           <h2 className="text-[1.05rem] font-semibold leading-snug text-ink sm:text-[1.15rem]">
-            {site.scopeNote.title}
+            {scopeNote.title}
           </h2>
           <p className="mt-2.5 text-[0.93rem] leading-relaxed text-muted">
-            {site.scopeNote.description}
+            {scopeNote.description}
           </p>
         </div>
       </div>

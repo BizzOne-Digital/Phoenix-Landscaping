@@ -1,12 +1,13 @@
-import { site } from '@/lib/site';
-import { services } from '@/lib/services';
+import { getServices, getSiteSettings } from '@/lib/content';
 
 /**
  * LocalBusiness structured data.
  * Only facts supplied by the business are included — no invented addresses,
  * opening hours, ratings, prices or review counts.
  */
-export default function StructuredData() {
+export default async function StructuredData() {
+  const [site, services] = await Promise.all([getSiteSettings(), getServices()]);
+
   const data = {
     '@context': 'https://schema.org',
     '@type': 'LocalBusiness',

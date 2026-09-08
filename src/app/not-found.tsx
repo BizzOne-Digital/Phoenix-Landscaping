@@ -1,13 +1,15 @@
 import type { Metadata } from 'next';
 import { ButtonLink } from '@/components/ui/Button';
-import { site } from '@/lib/site';
+import { getSiteSettings } from '@/lib/content';
 
 export const metadata: Metadata = {
   title: 'Page Not Found',
   robots: { index: false, follow: true },
 };
 
-export default function NotFound() {
+export default async function NotFound() {
+  const site = await getSiteSettings();
+
   return (
     <section className="section bg-warmwhite">
       <div className="container flex min-h-[46vh] flex-col items-center justify-center text-center">

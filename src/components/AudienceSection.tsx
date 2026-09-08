@@ -1,10 +1,12 @@
-import { audiences } from '@/lib/services';
+import { getAudiences } from '@/lib/content';
 import AudienceCard from '@/components/AudienceCard';
 import SectionHeading from '@/components/SectionHeading';
 import Reveal from '@/components/Reveal';
 import { ButtonLink } from '@/components/ui/Button';
 
-export default function AudienceSection() {
+export default async function AudienceSection() {
+  const audiences = await getAudiences();
+
   return (
     <section className="section bg-warmwhite">
       <div className="container">

@@ -3,7 +3,7 @@
 import { useState, type FormEvent } from 'react';
 import { AlertCircle, CheckCircle2, Loader2, Lock, Send } from 'lucide-react';
 import { propertyTypes, serviceOptions } from '@/lib/services';
-import { site } from '@/lib/site';
+import type { SiteSettingsView } from '@/lib/content';
 import { SubmitButton } from '@/components/ui/Button';
 
 type FormValues = {
@@ -57,7 +57,7 @@ function validate(values: FormValues): Errors {
 const fieldBase =
   'w-full min-h-[48px] rounded-md border bg-warmwhite px-4 py-3 text-[0.95rem] text-ink transition-colors placeholder:text-muted/70 focus:border-burgundy focus:outline-none';
 
-export default function QuoteForm() {
+export default function QuoteForm({ site }: { site: SiteSettingsView }) {
   const [values, setValues] = useState<FormValues>(initialValues);
   const [errors, setErrors] = useState<Errors>({});
   const [status, setStatus] = useState<Status>('idle');

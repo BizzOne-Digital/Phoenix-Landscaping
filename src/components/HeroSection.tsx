@@ -1,10 +1,15 @@
 import Image from 'next/image';
-import { heroShowcase, images } from '@/lib/images';
-import { site } from '@/lib/site';
+import { getHeroShowcase, getPageImages, getSiteSettings } from '@/lib/content';
 import { ButtonLink } from '@/components/ui/Button';
 import TrustBadges from '@/components/TrustBadges';
 
-export default function HeroSection() {
+export default async function HeroSection() {
+  const [site, images, heroShowcase] = await Promise.all([
+    getSiteSettings(),
+    getPageImages(),
+    getHeroShowcase(),
+  ]);
+
   return (
     <section className="relative isolate overflow-hidden bg-burgundy-800">
       <Image

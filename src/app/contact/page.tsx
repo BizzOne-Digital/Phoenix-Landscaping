@@ -5,8 +5,7 @@ import QuoteForm from '@/components/QuoteForm';
 import Reveal from '@/components/Reveal';
 import TrustBadges from '@/components/TrustBadges';
 import ScopeNote from '@/components/ScopeNote';
-import { images } from '@/lib/images';
-import { site } from '@/lib/site';
+import { getPageImages, getSiteSettings } from '@/lib/content';
 
 export const metadata: Metadata = {
   title: 'Contact Phoenix Landscaping | Free Quotes in Edmonton & Area',
@@ -21,7 +20,9 @@ export const metadata: Metadata = {
   },
 };
 
-export default function ContactPage() {
+export default async function ContactPage() {
+  const [site, images] = await Promise.all([getSiteSettings(), getPageImages()]);
+
   return (
     <>
       <PageHero
@@ -60,7 +61,7 @@ export default function ContactPage() {
           </Reveal>
 
           <Reveal delay={120} className="lg:sticky lg:top-28">
-            <QuoteForm />
+            <QuoteForm site={site} />
           </Reveal>
         </div>
       </section>

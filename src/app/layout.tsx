@@ -6,7 +6,9 @@ import Footer from '@/components/Footer';
 import MobileQuoteBar from '@/components/MobileQuoteBar';
 import IntroSplash from '@/components/IntroSplash';
 import StructuredData from '@/components/StructuredData';
+import SiteChrome from '@/components/SiteChrome';
 import { site } from '@/lib/site';
+import { getSiteSettings } from '@/lib/content';
 
 const display = Playfair_Display({
   subsets: ['latin'],
@@ -65,29 +67,30 @@ export const metadata: Metadata = {
   icons: { icon: '/favicon.ico' },
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+/**
+ * CMS content is cached, so public pages are regenerated at most every five
+ * minutes. Saving in the dashboard revalidates them immediately.
+ */
+export const revalidate = 300;
+
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  // Business details for the header, footer and mobile bar. These are client
+  // components, so the values are resolved here and passed down as props.
+  const settings = await getSiteSettings();
+
   return (
     <html lang="en-CA" className={`${display.variable} ${body.variable}`}>
       <body>
-        <IntroSplash />
-
-        <noscript>
-          {/* Content animates in with JavaScript; without it, show everything immediately. */}
-          <style>{`.reveal{opacity:1 !important;transform:none !important}`}</style>
-        </noscript>
-
-        <a
-          href="#main"
-          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-md focus:bg-burgundy focus:px-5 focus:py-3 focus:text-sm focus:font-semibold focus:text-white"
+        {/* Chrome is skipped on /admin so the dashboard renders on its own. */}
+        <SiteChrome
+          intro={<IntroSplash />}
+          navbar={<Navbar site={settings} />}
+          footer={<Footer />}
+          quoteBar={<MobileQuoteBar site={settings} />}
+          structuredData={<StructuredData />}
         >
-          Skip to main content
-        </a>
-
-        <Navbar />
-        <main id="main">{children}</main>
-        <Footer />
-        <MobileQuoteBar />
-        <StructuredData />
+          {children}
+        </SiteChrome>
       </body>
     </html>
   );

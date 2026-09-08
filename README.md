@@ -22,6 +22,7 @@ npm run build      # production build
 npm run start      # run the production build
 npm run lint       # eslint
 npm run typecheck  # tsc --noEmit
+npm run seed       # load the CMS content and the first admin account
 ```
 
 Requires Node.js 18.17 or newer.
@@ -44,7 +45,12 @@ Plus `sitemap.xml`, `robots.txt`, a 404 page, and the `POST /api/quote` form end
 
 ## 3. Where to change things
 
-Almost everything the client will ever want to edit lives in three files.
+> **Since the admin dashboard was added, these three files are the *starting*
+> content, not the live content.** `npm run seed` copies them into MongoDB, and
+> from then on the site reads from the database — so day-to-day edits happen at
+> `/admin` (see section 14). These files remain the seed source and the fallback
+> used when the database is unreachable, so keep them in step if you change
+> them by hand.
 
 ### `src/lib/site.ts`
 Business name, phone, email, service area, years of experience, live domain, navigation,
@@ -231,8 +237,9 @@ Any Next.js host works. The simplest path:
 
 1. Push the folder to a Git repository
 2. Import it into [Vercel](https://vercel.com) — the framework is detected automatically
-3. Add the environment variables from section 7
+3. Add the environment variables from `.env.example` (sections 7 and 14)
 4. Point the domain at the deployment and update `site.url`
+5. Run `npm run seed` once against the production database
 
 ---
 
@@ -274,3 +281,81 @@ if (pathname !== '/') return null;
 
 **To show it once per browser session** instead of on every load, guard the effect with
 `sessionStorage.getItem('phx-splash-seen')` and set that key when the splash finishes.
+
+---
+
+## 14. Admin dashboard and CMS
+
+The site content lives in MongoDB and is edited at **`/admin`**. The public
+pages are unchanged — they simply read their copy, lists and photography from
+the database instead of from `src/lib/*.ts`.
+
+### First-time setup
+
+1. Copy `.env.example` to `.env.local` and fill in `MONGODB_URI`,
+   `ADMIN_SESSION_SECRET`, `ADMIN_EMAIL` and `ADMIN_PASSWORD`.
+
+   ```bash
+   node -e "console.log(require('crypto').randomBytes(48).toString('hex'))"
+   ```
+
+   Use that output as `ADMIN_SESSION_SECRET`.
+
+2. Load the content and create the admin account:
+
+   ```bash
+   npm run seed
+   ```
+
+   The seed is idempotent — running it again never duplicates content and never
+   resets an existing password. Pass `--force-content` to reset the seeded
+   documents back to the values in `src/lib/*.ts`.
+
+3. Sign in at `/admin/login`. Remove `ADMIN_PASSWORD` from the environment once
+   the account exists.
+
+### What can be edited
+
+| Screen | Controls |
+| --- | --- |
+| Site settings | Business name, phone, email, service area, tagline, descriptions, years of experience, hero badges, the job-scope notice |
+| Services | The service pillars on the home page, services page and footer |
+| Who we serve | The client-type cards |
+| Four seasons | The four-season section |
+| Trust points | The "Why Clients Stay" cards |
+| Why choose us | The "Why Phoenix" grid |
+| Testimonials | Real client feedback (empty by default, so the "reviews coming soon" panel stays) |
+| Page photography | Each page's hero and feature photo, plus the home-page hero collage |
+| Gallery | Job photography, published at `/api/gallery` |
+| Media library | Every uploaded image, with folder filters and delete |
+
+Saving an edit revalidates the affected public pages immediately; no redeploy
+is needed. If the database is unreachable, the public site quietly falls back
+to the bundled content in `src/lib/*.ts` rather than erroring.
+
+Two things stay in code on purpose: `site.url` (it drives canonical URLs, the
+sitemap and Open Graph tags, which are resolved at build time) and the quote
+form's dropdown options in `src/lib/services.ts` (they are form logic, not
+copy).
+
+### Image uploads
+
+Uploaded images are stored **as binary data in MongoDB**, not on disk, and are
+served from `/api/uploads/{folder}/{filename}`. That is what makes them survive
+Vercel redeployments, cold starts and multiple serverless instances — a
+`public/uploads` folder would be wiped on every deploy.
+
+- JPEG, PNG, WebP and GIF, up to 8 MB.
+- The filename is generated on the server; the uploaded one is never trusted.
+- Replacing or removing an image deletes the old binary once the new value is
+  saved, so a failed upload never destroys the image that is still live.
+- Legacy `/uploads/...` paths from any earlier filesystem-based scheme resolve
+  to `/images/placeholder.png` instead of a broken image.
+
+### Roles
+
+`admin` can do everything. `editor` can manage content and upload images but
+cannot change site settings or delete from the media library. Every admin API
+route checks the session on the server and answers `401` when unauthenticated
+and `403` when the role is not permitted — hiding a button in the dashboard is
+never the only protection.

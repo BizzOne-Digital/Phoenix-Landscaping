@@ -3,16 +3,18 @@
 import Link from 'next/link';
 import { useEffect } from 'react';
 import { Mail, Phone, X } from 'lucide-react';
-import { nav, site } from '@/lib/site';
+import { nav } from '@/lib/site';
+import type { SiteSettingsView } from '@/lib/content';
 import { buttonClasses } from '@/components/ui/Button';
 
 type MobileMenuProps = {
   open: boolean;
   onClose: () => void;
   pathname: string;
+  site: SiteSettingsView;
 };
 
-export default function MobileMenu({ open, onClose, pathname }: MobileMenuProps) {
+export default function MobileMenu({ open, onClose, pathname, site }: MobileMenuProps) {
   useEffect(() => {
     if (!open) return;
 

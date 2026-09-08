@@ -1,9 +1,11 @@
-import { whyChoose } from '@/lib/site';
+import { getWhyChoose } from '@/lib/content';
 import Icon from '@/components/Icon';
 import SectionHeading from '@/components/SectionHeading';
 import Reveal from '@/components/Reveal';
 
-export default function WhyChooseUs() {
+export default async function WhyChooseUs() {
+  const whyChoose = await getWhyChoose();
+
   return (
     <section className="section bg-cream">
       <div className="container">

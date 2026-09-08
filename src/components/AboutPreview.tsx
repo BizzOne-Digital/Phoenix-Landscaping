@@ -1,8 +1,7 @@
 import Image from 'next/image';
 import { ArrowRight, Check } from 'lucide-react';
 import Link from 'next/link';
-import { images } from '@/lib/images';
-import { site } from '@/lib/site';
+import { getPageImages, getSiteSettings } from '@/lib/content';
 import Reveal from '@/components/Reveal';
 
 const points = [
@@ -13,7 +12,9 @@ const points = [
   'Residential and commercial property care',
 ];
 
-export default function AboutPreview() {
+export default async function AboutPreview() {
+  const [settings, images] = await Promise.all([getSiteSettings(), getPageImages()]);
+
   return (
     <section className="section bg-warmwhite">
       <div className="container grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
@@ -28,7 +29,7 @@ export default function AboutPreview() {
             />
           </div>
           <div className="absolute -bottom-6 -right-2 hidden rounded-card border border-gold/40 bg-burgundy px-7 py-5 text-cream shadow-lift sm:block lg:-right-6">
-            <p className="font-serif text-3xl font-semibold text-white">{site.yearsExperience}</p>
+            <p className="font-serif text-3xl font-semibold text-white">{settings.yearsExperience}</p>
             <p className="mt-1 text-[0.72rem] font-semibold uppercase tracking-[0.16em] text-gold-light">
               Years of Experience
             </p>

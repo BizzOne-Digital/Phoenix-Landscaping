@@ -4,12 +4,13 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { Mail, MapPin, Menu, Phone } from 'lucide-react';
-import { nav, site } from '@/lib/site';
+import { nav } from '@/lib/site';
+import type { SiteSettingsView } from '@/lib/content';
 import Logo from '@/components/Logo';
 import MobileMenu from '@/components/MobileMenu';
 import { buttonClasses } from '@/components/ui/Button';
 
-export default function Navbar() {
+export default function Navbar({ site }: { site: SiteSettingsView }) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -114,7 +115,7 @@ export default function Navbar() {
         </div>
       </header>
 
-      <MobileMenu open={open} onClose={() => setOpen(false)} pathname={pathname} />
+      <MobileMenu open={open} onClose={() => setOpen(false)} pathname={pathname} site={site} />
     </>
   );
 }

@@ -1,9 +1,11 @@
-import { trustPoints } from '@/lib/site';
+import { getTrustPoints } from '@/lib/content';
 import Icon from '@/components/Icon';
 import SectionHeading from '@/components/SectionHeading';
 import Reveal from '@/components/Reveal';
 
-export default function TrustSection() {
+export default async function TrustSection() {
+  const trustPoints = await getTrustPoints();
+
   return (
     <section className="section bg-warmwhite">
       <div className="container">

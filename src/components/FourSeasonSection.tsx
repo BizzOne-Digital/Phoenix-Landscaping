@@ -1,10 +1,12 @@
 import Image from 'next/image';
-import { seasons } from '@/lib/services';
+import { getSeasons } from '@/lib/content';
 import Icon from '@/components/Icon';
 import SectionHeading from '@/components/SectionHeading';
 import Reveal from '@/components/Reveal';
 
-export default function FourSeasonSection() {
+export default async function FourSeasonSection() {
+  const seasons = await getSeasons();
+
   return (
     <section className="section bg-burgundy-800">
       <div className="container">

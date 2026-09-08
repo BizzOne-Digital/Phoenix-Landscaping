@@ -1,16 +1,16 @@
 import { Quote } from 'lucide-react';
-import { testimonials } from '@/lib/testimonials';
+import { getSiteSettings, getTestimonials } from '@/lib/content';
 import SectionHeading from '@/components/SectionHeading';
 import Reveal from '@/components/Reveal';
 import { ButtonLink } from '@/components/ui/Button';
-import { site } from '@/lib/site';
 
 type TestimonialsProps = {
   /** `preview` renders the shorter homepage version. */
   variant?: 'preview' | 'full';
 };
 
-export default function Testimonials({ variant = 'preview' }: TestimonialsProps) {
+export default async function Testimonials({ variant = 'preview' }: TestimonialsProps) {
+  const [testimonials, settings] = await Promise.all([getTestimonials(), getSiteSettings()]);
   const hasTestimonials = testimonials.length > 0;
 
   return (
@@ -66,7 +66,7 @@ export default function Testimonials({ variant = 'preview' }: TestimonialsProps)
                 after your property, we would be glad to hear how it went.
               </p>
               <div className="mt-7 flex flex-col gap-3 sm:flex-row">
-                <ButtonLink href={site.emailHref} variant="secondary">
+                <ButtonLink href={settings.emailHref} variant="secondary">
                   Share Your Experience
                 </ButtonLink>
                 <ButtonLink href="/contact#quote">Request a Free Quote</ButtonLink>

@@ -7,8 +7,7 @@ import Reveal from '@/components/Reveal';
 import Icon from '@/components/Icon';
 import QuoteCTA from '@/components/QuoteCTA';
 import WhyChooseUs from '@/components/WhyChooseUs';
-import { images } from '@/lib/images';
-import { site } from '@/lib/site';
+import { getPageImages, getSiteSettings } from '@/lib/content';
 
 export const metadata: Metadata = {
   title: 'About Phoenix Landscaping | Family-Operated Edmonton Property Care',
@@ -50,7 +49,9 @@ const approach = [
   },
 ] as const;
 
-export default function AboutPage() {
+export default async function AboutPage() {
+  const [site, images] = await Promise.all([getSiteSettings(), getPageImages()]);
+
   return (
     <>
       <PageHero

@@ -1,10 +1,12 @@
-import { services } from '@/lib/services';
+import { getServices } from '@/lib/content';
 import ServiceCard from '@/components/ServiceCard';
 import SectionHeading from '@/components/SectionHeading';
 import Reveal from '@/components/Reveal';
 import { ButtonLink } from '@/components/ui/Button';
 
-export default function ServiceGrid() {
+export default async function ServiceGrid() {
+  const services = await getServices();
+
   return (
     <section className="section bg-cream" id="services">
       <div className="container">

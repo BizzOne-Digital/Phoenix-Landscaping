@@ -1,12 +1,17 @@
 import { Check } from 'lucide-react';
-import { heroBadges } from '@/lib/site';
+import { getSiteSettings } from '@/lib/content';
 
 type TrustBadgesProps = {
   tone?: 'light' | 'dark';
   className?: string;
 };
 
-export default function TrustBadges({ tone = 'light', className = '' }: TrustBadgesProps) {
+export default async function TrustBadges({
+  tone = 'light',
+  className = '',
+}: TrustBadgesProps) {
+  const { heroBadges } = await getSiteSettings();
+
   return (
     <ul className={`flex flex-wrap gap-x-5 gap-y-2.5 ${className}`.trim()}>
       {heroBadges.map((badge) => (

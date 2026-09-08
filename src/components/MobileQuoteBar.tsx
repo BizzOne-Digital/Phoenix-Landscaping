@@ -3,14 +3,14 @@
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { Phone } from 'lucide-react';
-import { site } from '@/lib/site';
+import type { SiteSettingsView } from '@/lib/content';
 import { buttonClasses } from '@/components/ui/Button';
 
 /**
  * Slim mobile action bar. Appears once the visitor has scrolled past the hero
  * so the quote CTA and phone number are never more than one tap away.
  */
-export default function MobileQuoteBar() {
+export default function MobileQuoteBar({ site }: { site: SiteSettingsView }) {
   const [show, setShow] = useState(false);
 
   useEffect(() => {

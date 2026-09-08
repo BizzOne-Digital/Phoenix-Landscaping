@@ -9,8 +9,7 @@ import FourSeasonSection from '@/components/FourSeasonSection';
 import QuoteCTA from '@/components/QuoteCTA';
 import ScopeNote from '@/components/ScopeNote';
 import { ButtonLink } from '@/components/ui/Button';
-import { services } from '@/lib/services';
-import { images } from '@/lib/images';
+import { getPageImages, getServices } from '@/lib/content';
 
 export const metadata: Metadata = {
   title: 'Landscaping, Tree Trimming & Snow Removal Services in Edmonton',
@@ -25,7 +24,9 @@ export const metadata: Metadata = {
   },
 };
 
-export default function ServicesPage() {
+export default async function ServicesPage() {
+  const [services, images] = await Promise.all([getServices(), getPageImages()]);
+
   return (
     <>
       <PageHero
